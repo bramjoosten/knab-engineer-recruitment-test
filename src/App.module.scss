@@ -1,0 +1,36 @@
+.App {
+  padding: 60px;
+  display: flex;
+  margin: 100px auto;
+  flex-direction: column;
+  padding: 60px;
+  border: 1px solid rgba(#ddd, 0.5);
+  border-radius: 5px;
+  box-shadow: 0px 7px 10px rgba(#000, 0.3);
+  max-width: 400px;
+}
+
+.Form {
+  display: flex;
+  flex-direction: column;
+
+  label {
+    margin-bottom: 1em;
+  }
+}
+
+.InputField {
+  display: flex;
+  flex-direction: row;
+
+  input[type="text"] {
+    margin-right: 10px;
+  }
+
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  font-family: sans-serif;
+}
