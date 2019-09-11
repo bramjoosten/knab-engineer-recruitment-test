@@ -30,24 +30,16 @@ export const fetchFail = (error) => {
     }
 }
 
-export const fetchCryptoSuccess = (quote) => {
-    // console.log("[actions/fetchQuoteSuccess]",value)
+export const fetchCryptoSuccess = (data) => {
     return {
         type: actionTypes.FETCH_CRYPTO_SUCCESS,
-        quote: quote
+        data: data
     }
 }
-export const fetchFiatSuccess = (quotes) => {
-    // console.log("[actions/fetchQuoteSuccess]",value)
+export const fetchFiatSuccess = (data) => {
     return {
         type: actionTypes.FETCH_FIAT_SUCCESS,
-        quotes: quotes
-    }
-}
-
-export const calculateStart = () => {
-    return {
-        type: actionTypes.CALCULATE_START
+        data: data
     }
 }
 
@@ -65,10 +57,15 @@ export const calculate = (userInput) => {
     }
 }
 
-export const calculateFail = (error) => {
+export const calculateClear = () => {
     return {
-        type: actionTypes.CALCULATE_FAIL,
-        error: error
+        type: actionTypes.CALCULATE_CLEAR
     }
 }
 
+export const setValidate = (bool) => {
+    return {
+        type: actionTypes.VALIDATE_SET,
+        isValid: bool
+    }
+}

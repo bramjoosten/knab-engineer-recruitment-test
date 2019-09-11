@@ -9,7 +9,7 @@ export function* calculateSaga(action) {
 
     //should return object with end results
     yield all([
-        put(actions.fetchFiat(action.userInput)),
+        put(actions.fetchFiat()),
         put(actions.fetchCrypto(action.userInput)),
     ])
 
@@ -22,17 +22,18 @@ export function* calculateSaga(action) {
 
     const rates = yield {
         USD: 1,
-        ...fiat.quotes.rates
+        ...fiat.data.rates
     }
+    yield console.log(crypto)
 
 
-    let newObj = Object.assign(
+    let quotes = Object.assign(
         ...Object.entries(rates).map(([currency, v]) => ({
-            [currency]: v * crypto.quote
+            [currency]: v * crypto.data.quote.USD.price
         }))
     );
 
-    yield put(actions.calculateSuccess(newObj))
+    yield put(actions.calculateSuccess({quotes:quotes,name:crypto.data.name}))
 
 }
 
@@ -44,14 +45,14 @@ export function* fetchCryptoSaga(action) {
         const path = "/v1/cryptocurrency/quotes/latest"
         const symbol = action.value.length === 0 ? '' : `symbol=${action.value}`
         const response = yield call(axios.get, 'https://bramjoosten.nl/crypto-converter/proxy/?path=' + path + '&' + symbol)
-        const quote = response.data.data[action.value].quote.USD.price
-        yield put(actions.fetchCryptoSuccess(quote))
+        const data = response.data.data[action.value]
+        yield put(actions.fetchCryptoSuccess(data))
     } catch (error) {
         yield put(actions.fetchFail(error.toString()))
     }
 }
 
-export function* fetchFiatSaga(action) {
+export function* fetchFiatSaga() {
     yield put(actions.fetchStart())
     try {
         const response = yield axios.get('https://api.exchangeratesapi.io/latest?symbols=EUR,GBP,BRL,AUD&base=USD')
