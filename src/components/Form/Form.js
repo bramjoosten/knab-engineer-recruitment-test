@@ -3,6 +3,7 @@ import classes from './Form.module.scss'
 import { connect } from 'react-redux'
 import * as actions from 'store/actions'
 import { checkValidity } from 'shared/utility'
+import { ReactComponent as Spinner } from 'assets/spinner.svg'
 
 const Form = (props) => {
     const [inputValue, setInputValue] = useState('')
@@ -14,7 +15,7 @@ const Form = (props) => {
         setInputValue(ev.target.value)
         setIsTouched(true)
         const validity = checkValidity(ev.target.value, { required: true, minLength: 3 })
-        if(validity !== props.isValid){
+        if (validity !== props.isValid) {
             props.onSetValidity(validity)
         }
     }
@@ -24,8 +25,8 @@ const Form = (props) => {
     if (props.error) {
         errorMessage = props.error
     }
-    
-    
+
+
 
 
     useEffect(() => {
@@ -40,18 +41,24 @@ const Form = (props) => {
         }
     }, [inputValue, isTouched])
 
+    const loadingStyle = (loading) => {
+        return loading ? { opacity: 1 } : { opacity: 0 }
+    }
+
     return (
-        <form className={classes.Form} >
-            <label htmlFor="input">insert your 3-letter crypto code</label>
+        <form className={classes.Wrapper} >
+            <label htmlFor="input">Type your crypto code</label>
             <div className={classes.InputField} valid={props.isValid ? "valid" : null}>
                 <input
                     ref={inputRef}
                     id="input"
                     type="text"
-                    placeholder="e.g. BTC"
+                    placeholder={"e.g. \"btc\""}
                     value={inputValue}
                     onChange={inputChangedHandler}
+                    spellcheck="false"
                     autoFocus></input>
+                <Spinner title="spinner" height="30" style={loadingStyle(props.loading)} />
             </div>
         </form>
     )
@@ -59,19 +66,19 @@ const Form = (props) => {
 
 const mapStateToProps = state => {
     return {
-      loading: state.loading,
-      error: state.error,
-      result: state.calculatedResult,
-      isValid: state.formIsValid
+        loading: state.loading,
+        error: state.error,
+        result: state.calculatedResult,
+        isValid: state.formIsValid
     }
-  }
-  
-  const mapDispatchToProps = dispatch => {
+}
+
+const mapDispatchToProps = dispatch => {
     return {
-      onCalculate: (value) => dispatch(actions.calculate(value)),
-      onSetValidity: (isValid) => dispatch(actions.setValidate(isValid))
+        onCalculate: (value) => dispatch(actions.calculate(value)),
+        onSetValidity: (isValid) => dispatch(actions.setValidate(isValid))
     }
-  }
+}
 
 
-  export default connect(mapStateToProps,mapDispatchToProps)(Form)
+export default connect(mapStateToProps, mapDispatchToProps)(Form)

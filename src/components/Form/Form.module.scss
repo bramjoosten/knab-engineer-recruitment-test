@@ -1,0 +1,32 @@
+.Wrapper {
+    display: flex;
+    flex-direction: column;
+
+    label {
+        margin-bottom: 10px;
+    }
+
+    input {
+        font-size: 30px;
+        width: 100%;
+        border: none;
+        border-bottom: 1px solid rgba(#000, 0.5);
+        padding: 10px 10px 5px 0;
+        outline:none;
+    }
+
+    svg {
+        position: absolute;
+        right: -47px;
+        top: 15px;
+        width: 30px;
+        height: 30px;
+        transition: opacity .1s .2s linear;
+    }
+    
+
+}
+
+.InputField {
+    position: relative;
+}

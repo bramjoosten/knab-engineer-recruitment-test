@@ -9,11 +9,10 @@ const App = props => {
  
 
   return (
-    <div className={classes.App}>
+    <div className={classes.Wrapper}>
       {console.log("[render]")}
       {/* <p>{errorMessage}</p> */}
       <Form />
-      <br />
       <Results/>
     </div>
   );

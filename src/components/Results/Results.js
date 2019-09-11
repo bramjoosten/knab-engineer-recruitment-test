@@ -3,9 +3,11 @@ import classes from './Results.module.scss'
 import { connect } from 'react-redux'
 import * as actions from 'store/actions'
 
+
 const Results = (props) => {
 
-    let results = "please enter data"
+    let results = null
+
 
 
     if (!props.isValid) {
@@ -37,20 +39,22 @@ const Results = (props) => {
 
             return (
                 <li key={currency}>
-                    <span className="symbol">{symbol}</span>
-                    <span className="digits">{digits}</span>
+                    <span className={classes.Symbol}>{symbol}</span>
+                    <span className={classes.Digits}>{digits}</span>
                 </li>
             )
         })
     } else {
-        results = "please enter data"
+        results = null
 
 
     }
 
+
+
     return (
         <div className={classes.Wrapper}>
-            {props.result ? <p>{"1 "}{props.result.name}{" equals:"}</p> : null}
+            {props.result ? <p>{"1 "}{props.result.name}{" equals to:"}</p> : null}
             {results}
         </div>
     )
@@ -59,7 +63,8 @@ const Results = (props) => {
 const mapStateToProps = state => {
     return {
         result: state.calculatedResult,
-        isValid: state.formIsValid
+        isValid: state.formIsValid,
+        loading: state.loading
     }
 }
 const mapDispatchToProps = dispatch => {
