@@ -2,39 +2,31 @@ import React, { useState, useEffect, useRef } from 'react'
 import classes from 'App.module.scss'
 import { connect } from 'react-redux'
 import * as actions from 'store/actions'
+import { checkValidity } from 'shared/utility'
 
 const App = props => {
   // console.log("[App]")
-
   const [inputValue, setInputValue] = useState('')
+  const [isValid, setIsValid] = useState(false)
+  const [isTouched, setIsTouched] = useState(false)
   const inputRef = useRef()
 
   const inputChangedHandler = ev => {
     console.log("[inputChangedHandler]", ev.target.value)
     setInputValue(ev.target.value)
+    setIsTouched(true)
+    const validity = checkValidity(ev.target.value, { required: true, minLength: 3 })
+    setIsValid(validity)
   }
 
-  const calculate = (inputValue) => {
-    console.log("[calculate]", typeof (inputValue))
-    try {
-      props.onFetchCrypto(inputValue)
-      props.onFetchFiat()
 
-    } catch (error) {
-      console.log(error)
-    }
-  }
 
   let resultList = "please enter data"
 
-  if (props.fiat && props.crypto) {
-    const rates = {
-      USD: 1,
-      ...props.fiat.rates
-    }
-
-    resultList = Object.keys(rates).map(currency =>
-      <li key={currency}>{rates[currency] * props.crypto} {currency}</li>
+  if (props.result) {
+    
+    resultList = Object.keys(props.result).map(currency =>
+      <li key={currency}>{[currency]}:{props.result[currency]}</li>
     )
   } else {
 
@@ -50,8 +42,8 @@ const App = props => {
   useEffect(() => {
     console.log("[useEffect]")
     const timer = setTimeout(() => {
-      if (inputValue === inputRef.current.value) {
-        calculate(inputValue.toUpperCase())
+      if (isValid && isTouched && inputValue === inputRef.current.value) {
+        props.onCalculate(inputValue.toUpperCase())
       }
     }, 500)
     return () => {
@@ -63,10 +55,10 @@ const App = props => {
   return (
     <div className={classes.App}>
       {console.log("[render]")}
-      <p>{errorMessage}</p>
+      {/* <p>{errorMessage}</p> */}
       <form className={classes.Form} >
         <label htmlFor="input">insert your 3-letter crypto code</label>
-        <div className={classes.InputField}>
+        <div className={classes.InputField} valid={isValid ? "valid" : null}>
           <input
             ref={inputRef}
             id="input"
@@ -91,16 +83,13 @@ const mapStateToProps = state => {
   return {
     loading: state.loading,
     error: state.error,
-    touched: state.touched,
-    crypto: state.crypto,
-    fiat: state.fiat
+    result: state.calculatedResult
   }
 }
 
 const mapDispatchToProps = dispatch => {
   return {
-    onFetchCrypto: (value) => dispatch(actions.fetchCrypto(value)),
-    onFetchFiat: (value) => dispatch(actions.fetchFiat(value))
+    onCalculate: (value) => dispatch(actions.calculate(value))
   }
 }
 

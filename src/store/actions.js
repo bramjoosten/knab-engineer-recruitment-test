@@ -30,19 +30,45 @@ export const fetchFail = (error) => {
     }
 }
 
-export const fetchCryptoSuccess = (result) => {
+export const fetchCryptoSuccess = (quote) => {
     // console.log("[actions/fetchQuoteSuccess]",value)
     return {
         type: actionTypes.FETCH_CRYPTO_SUCCESS,
-        result: result
+        quote: quote
     }
 }
-export const fetchFiatSuccess = (result) => {
+export const fetchFiatSuccess = (quotes) => {
     // console.log("[actions/fetchQuoteSuccess]",value)
     return {
         type: actionTypes.FETCH_FIAT_SUCCESS,
+        quotes: quotes
+    }
+}
+
+export const calculateStart = () => {
+    return {
+        type: actionTypes.CALCULATE_START
+    }
+}
+
+export const calculateSuccess = (result) => {
+    return {
+        type: actionTypes.CALCULATE_SUCCESS,
         result: result
     }
 }
 
+export const calculate = (userInput) => {
+    return {
+        type: actionTypes.CALCULATE,
+        userInput: userInput
+    }
+}
+
+export const calculateFail = (error) => {
+    return {
+        type: actionTypes.CALCULATE_FAIL,
+        error: error
+    }
+}
 
