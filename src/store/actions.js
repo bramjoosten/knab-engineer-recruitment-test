@@ -66,3 +66,10 @@ export const setValidate = (bool) => {
         isValid: bool
     }
 }
+
+export const setAnimating = (bool) => {
+    return {
+        type: actionTypes.ANIMATING_SET,
+        isAnimating: bool
+    }
+}

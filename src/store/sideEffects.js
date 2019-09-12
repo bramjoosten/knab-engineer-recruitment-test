@@ -47,11 +47,11 @@ export function* fetchCryptoSaga(action) {
 
             yield put(actions.fetchCryptoSuccess(data))
         }else{
-            yield put(actions.fetchFail("No data from crypto api"))    
+            yield put(actions.fetchFail("Oops, code not recognized. Please try again."))    
         }
 
     } catch (error) {
-        yield put(actions.fetchFail(error.toString()))
+        yield put(actions.fetchFail("Oops, code not recognized. Please try again."))
     }
 }
 

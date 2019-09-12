@@ -5,7 +5,8 @@ const initialState = {
     loading: false,
     error: null,
     formIsValid: false,
-    calculatedResult: null
+    calculatedResult: null,
+    isAnimating:false
 }
 
 
@@ -53,6 +54,12 @@ const setValidate = (state,action)=>{
     })
 }
 
+const setAnimating = (state,action)=>{
+    return updateObject(state,{
+        isAnimating: action.isAnimating
+    })
+}
+
 
 const reducer = (state = initialState, action) => {
     switch (action.type) {
@@ -63,6 +70,7 @@ const reducer = (state = initialState, action) => {
         case actionTypes.CALCULATE_SUCCESS: return calculateSuccess(state, action)
         case actionTypes.CALCULATE_CLEAR: return calculateClear(state,action)
         case actionTypes.VALIDATE_SET: return setValidate(state,action)
+        case actionTypes.ANIMATING_SET: return setAnimating(state,action)
         default:
             return state
     }

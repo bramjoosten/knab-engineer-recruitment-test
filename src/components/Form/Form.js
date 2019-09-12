@@ -3,8 +3,6 @@ import classes from './Form.module.scss'
 import { connect } from 'react-redux'
 import * as actions from 'store/actions'
 import { checkValidity } from 'shared/utility'
-import { ReactComponent as Spinner } from 'assets/spinner.svg'
-
 
 const Form = (props) => {
     const [inputValue, setInputValue] = useState('')
@@ -15,19 +13,12 @@ const Form = (props) => {
         setInputValue(ev.target.value)
         setIsTouched(true)
         const validity = checkValidity(ev.target.value, { required: true, minLength: 3 })
+        props.onClearResult()
         if (validity !== props.isValid) {
+            
             props.onSetValidity(validity)
         }
     }
-
-
-    let errorMessage = 'no error'
-    if (props.error) {
-        errorMessage = props.error
-    }
-
-
-
 
     useEffect(() => {
         const timer = setTimeout(() => {
@@ -40,9 +31,7 @@ const Form = (props) => {
         }
     }, [inputValue, isTouched])
 
-    const loadingStyle = (loading) => {
-        return loading ? { opacity: 1 } : { opacity: 0 }
-    }
+    
 
     return (
         <form className={classes.Wrapper} >
@@ -50,15 +39,14 @@ const Form = (props) => {
             <label htmlFor="input">Type your crypto code</label>
             <div className={classes.InputField} valid={props.isValid ? "valid" : null}>
                 <input
+                    type="search"
                     ref={inputRef}
                     id="input"
-                    type="search"
                     placeholder={"e.g. \"btc\""}
                     value={inputValue}
                     onChange={inputChangedHandler}
                     spellCheck="false"
                     autoFocus></input>
-                <Spinner title="spinner" height="30" style={loadingStyle(props.loading)} />
             </div>
         </form>
     )
@@ -76,7 +64,8 @@ const mapStateToProps = state => {
 const mapDispatchToProps = dispatch => {
     return {
         onCalculate: (value) => dispatch(actions.calculate(value)),
-        onSetValidity: (isValid) => dispatch(actions.setValidate(isValid))
+        onSetValidity: (isValid) => dispatch(actions.setValidate(isValid)),
+        onClearResult: () => dispatch(actions.calculateClear())
     }
 }
 

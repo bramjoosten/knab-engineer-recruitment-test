@@ -8,6 +8,7 @@
         border-bottom: 1px solid rgba(#000, 0.5);
         padding-top: 10px;
         margin-bottom: 10px;
+        opacity: 0;
     }
     p{
         margin-top:50px;
@@ -23,4 +24,7 @@
 
 .Digits {
     font-size: 20px;
+}
+.Description{
+    opacity: 0;
 }
