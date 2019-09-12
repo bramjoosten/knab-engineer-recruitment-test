@@ -5,12 +5,10 @@ import Results from 'components/Results/Results'
 import Form from 'components/Form/Form'
 
 const App = props => {
-  // console.log("[App]")
- 
 
   return (
     <div className={classes.Wrapper}>
-      {console.log("[render]")}
+      {console.log("[App/render]")}
       {/* <p>{errorMessage}</p> */}
       <Form />
       <Results/>

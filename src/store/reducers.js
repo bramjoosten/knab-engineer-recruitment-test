@@ -36,8 +36,8 @@ const calculateSuccess = (state, action) => {
 
 const fetchFail = (state, action) => {
     return updateObject(state, {
-        error: action.error,
         loading: false,
+        error: action.error
     })
 }
 
@@ -55,7 +55,6 @@ const setValidate = (state,action)=>{
 
 
 const reducer = (state = initialState, action) => {
-    // console.log('[reducer]', action, state)
     switch (action.type) {
         case actionTypes.FETCH_START: return fetchStart(state, action)
         case actionTypes.FETCH_CRYPTO_SUCCESS: return fetchSuccess(state, action)

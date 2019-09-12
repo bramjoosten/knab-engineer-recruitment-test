@@ -2,28 +2,30 @@ import React, { useEffect } from 'react'
 import classes from './Results.module.scss'
 import { connect } from 'react-redux'
 import * as actions from 'store/actions'
-
+import { CSSTransition,TransitionGroup } from 'react-transition-group'
 
 const Results = (props) => {
 
     let results = null
-
-
-
-    if (!props.isValid) {
+    console.log("[Results/props.error]", props.error)
+    if (!props.isValid || props.error) {
         props.onClearResult()
     }
+    
 
     if (props.result) {
 
         results = Object.keys(props.result.quotes).map(currency => {
-            var formatter = new Intl.NumberFormat(undefined, {
+            var formatter = new Intl.NumberFormat("nl-NL", {
                 style: 'currency',
                 currency: currency,
                 minimumFractionDigits: 4,
                 maximumFractionDigits: 4,
                 localeMatcher: 'best fit'
             })
+            console.log(formatter)
+
+            
 
             const formattedArray = formatter.formatToParts(props.result.quotes[currency])
 
@@ -54,6 +56,7 @@ const Results = (props) => {
 
     return (
         <div className={classes.Wrapper}>
+            {console.log("[Results/render]")}
             {props.result ? <p>{"1 "}{props.result.name}{" equals to:"}</p> : null}
             {results}
         </div>
@@ -64,7 +67,8 @@ const mapStateToProps = state => {
     return {
         result: state.calculatedResult,
         isValid: state.formIsValid,
-        loading: state.loading
+        loading: state.loading,
+        error: state.error
     }
 }
 const mapDispatchToProps = dispatch => {

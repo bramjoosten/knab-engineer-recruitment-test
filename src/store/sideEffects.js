@@ -5,7 +5,6 @@ import * as actionTypes from './actionTypes'
 
 export function* calculateSaga(action) {
 
-    console.log('[calculateSaga/action]', action)
 
     //should return object with end results
     yield all([
@@ -24,7 +23,6 @@ export function* calculateSaga(action) {
         USD: 1,
         ...fiat.data.rates
     }
-    yield console.log(crypto)
 
 
     let quotes = Object.assign(
@@ -38,7 +36,6 @@ export function* calculateSaga(action) {
 }
 
 export function* fetchCryptoSaga(action) {
-    console.log("[fetchCryptoSaga]", action)
     yield put(actions.fetchStart())
 
     try {
@@ -46,7 +43,13 @@ export function* fetchCryptoSaga(action) {
         const symbol = action.value.length === 0 ? '' : `symbol=${action.value}`
         const response = yield call(axios.get, 'https://bramjoosten.nl/crypto-converter/proxy/?path=' + path + '&' + symbol)
         const data = response.data.data[action.value]
-        yield put(actions.fetchCryptoSuccess(data))
+        if(data){
+
+            yield put(actions.fetchCryptoSuccess(data))
+        }else{
+            yield put(actions.fetchFail("No data from crypto api"))    
+        }
+
     } catch (error) {
         yield put(actions.fetchFail(error.toString()))
     }
@@ -55,10 +58,9 @@ export function* fetchCryptoSaga(action) {
 export function* fetchFiatSaga() {
     yield put(actions.fetchStart())
     try {
-        const response = yield axios.get('https://api.exchangeratesapi.io/latest?symbols=EUR,GBP,BRL,AUD&base=USD')
+        const response = yield call(axios.get,'https://api.exchangeratesapi.io/latest?symbols=EUR,GBP,BRL,AUD&base=USD')
         yield put(actions.fetchFiatSuccess(response.data))
     } catch (error) {
-        console.log(error)
         yield put(actions.fetchFail(error))
 
     }

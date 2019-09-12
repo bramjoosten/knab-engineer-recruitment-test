@@ -6,7 +6,6 @@ export const fetchStart = () => {
     }
 }
 
-//used as onFetchCrypto in App.js
 export const fetchCrypto = (value) => {
     return {
         type: actionTypes.FETCH_CRYPTO,
@@ -14,7 +13,6 @@ export const fetchCrypto = (value) => {
     }
 }
 
-//used as onFetchFiat in App.js
 export const fetchFiat = (value) => {
     return {
         type: actionTypes.FETCH_FIAT,
@@ -23,7 +21,6 @@ export const fetchFiat = (value) => {
 }
 
 export const fetchFail = (error) => {
-    // console.log("[actions/fetchQuoteFail]",error)
     return {
         type: actionTypes.FETCH_FAIL,
         error: error
