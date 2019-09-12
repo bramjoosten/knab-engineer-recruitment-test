@@ -7,35 +7,39 @@ import { checkValidity } from 'shared/utility'
 const Form = (props) => {
     const [inputValue, setInputValue] = useState('')
     const [isTouched, setIsTouched] = useState(false)
+    const { isValid, onCalculate } = props
     const inputRef = useRef()
 
     const inputChangedHandler = ev => {
         setInputValue(ev.target.value)
         setIsTouched(true)
+
         const validity = checkValidity(ev.target.value, { required: true, minLength: 3 })
         props.onClearResult()
+
         if (validity !== props.isValid) {
-            
+
             props.onSetValidity(validity)
         }
     }
 
     useEffect(() => {
         const timer = setTimeout(() => {
-            if (props.isValid && isTouched && inputValue === inputRef.current.value) {
-                props.onCalculate(inputValue.toUpperCase())
+            if (isValid && isTouched && inputValue === inputRef.current.value) {
+                onCalculate(inputValue.toUpperCase())
+                if (typeof window.orientation !== 'undefined') {
+                    inputRef.current.blur()
+                }
             }
         }, 500)
         return () => {
             clearTimeout(timer)
         }
-    }, [inputValue, isTouched])
+    }, [inputValue, isTouched, isValid, onCalculate])
 
-    
 
     return (
         <form className={classes.Wrapper} >
-            {console.log("[Form/render]")}
             <label htmlFor="input">Type your crypto code</label>
             <div className={classes.InputField} valid={props.isValid ? "valid" : null}>
                 <input
@@ -46,6 +50,7 @@ const Form = (props) => {
                     value={inputValue}
                     onChange={inputChangedHandler}
                     spellCheck="false"
+                    autoComplete="off"
                     autoFocus></input>
             </div>
         </form>

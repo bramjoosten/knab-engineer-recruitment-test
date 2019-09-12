@@ -15,7 +15,6 @@ const App = props => {
 
   return (
     <div className={classes.Wrapper}>
-      {console.log("[App/render]")}
       <Spinner className={classes.Spinner} loading={props.loading} />
       <Form />
       {results}

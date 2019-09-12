@@ -13,8 +13,6 @@ const Results = (props) => {
     const myElements = []
 
     useEffect(() => {
-        console.log("[Results/useEffect]")
-        console.log(myElements)
         myTween.staggerFromTo(
             myElements,
             0.5,
@@ -26,11 +24,6 @@ const Results = (props) => {
 
     }, [myElements, myTween, isAnimating])
 
-
-
-    
-
-    console.log("[Results/props.error]", props.error)
     if (!props.isValid || props.error) {
         props.onClearResult()    
     }
@@ -74,15 +67,12 @@ const Results = (props) => {
 
     } else {
         results = null
-
-
     }
 
     const resultDescription = props.result ? <p className={classes.Description} ref={p => myElements[0] = (p)}>{"1 "}{props.result.name}{" equals to:"}</p> : null
 
     return (
         <div className={classes.Wrapper}>
-            {console.log("[Results/render]")}
             {resultDescription}
             {results}
         </div>
