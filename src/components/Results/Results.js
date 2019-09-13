@@ -40,17 +40,8 @@ const Results = (props) => {
                 maximumFractionDigits: 4
             })
 
-
-            const formattedArray = formatter.formatToParts(props.result.quotes[currency])
-            const symbol = formattedArray[0].value
-
-            let digits = ''
-
-            formattedArray.forEach(key => {
-                if (key.type !== 'currency') {
-                    digits += key.value
-                }
-            });
+            const formattedString = formatter.format(props.result.quotes[currency])
+            const [symbol,,digits] = formattedString.split(/(\s)/)
 
             return (
 
