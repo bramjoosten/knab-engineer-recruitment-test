@@ -25,14 +25,14 @@ const Results = (props) => {
     }, [myElements, myTween, isAnimating])
 
     if (!props.isValid || props.error) {
-        props.onClearResult()    
+        props.onClearResult()
     }
 
 
     if (props.result) {
-        
+
         results = Object.keys(props.result.quotes).map((currency, index) => {
-            
+
             const formatter = new Intl.NumberFormat("nl-NL", {
                 style: 'currency',
                 currency: currency,
@@ -41,7 +41,7 @@ const Results = (props) => {
             })
 
             const formattedString = formatter.format(props.result.quotes[currency])
-            const [symbol,,digits] = formattedString.split(/(\s)/)
+            const [symbol, , digits] = formattedString.split(/(\s)/)
 
             return (
 

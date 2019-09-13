@@ -12,9 +12,9 @@
         border: none;
         border-bottom: 1px solid rgba(rgb(15, 6, 6), 0.5);
         padding: 10px 10px 5px 0;
-        outline:none;
+        outline: none;
     }
-    
+
 
 }
 
@@ -22,12 +22,10 @@
     position: relative;
 }
 
+input[type="search"] {
+    -webkit-appearance: textfield;
+}
 
-  
-  input[type="search"] {
-      -webkit-appearance: textfield;
-  }
-  
-  input[type="search"]::-webkit-search-decoration {
-      -webkit-appearance: none;
-  }
+input[type="search"]::-webkit-search-decoration {
+    -webkit-appearance: none;
+}

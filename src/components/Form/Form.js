@@ -39,7 +39,7 @@ const Form = (props) => {
 
 
     return (
-        <form className={classes.Wrapper} onSubmit={(ev)=>ev.preventDefault()}>
+        <form className={classes.Wrapper} onSubmit={(ev) => ev.preventDefault()}>
             <label htmlFor="input">Type your crypto code</label>
             <div className={classes.InputField} valid={props.isValid ? "valid" : null}>
                 <input

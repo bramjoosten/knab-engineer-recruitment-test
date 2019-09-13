@@ -10,10 +10,7 @@ import rootReducer from 'store/reducers'
 import { watchSideEffects } from 'store/sideEffects'
 
 var isChrome = /Chrome/.test(navigator.userAgent) && /Google Inc/.test(navigator.vendor);
-
 const composeEnhancers = (process.env.NODE_ENV === 'development') && isChrome ? window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ : null || compose
-
-
 const sagaMiddleware = createSagaMiddleware()
 
 const store = createStore(
