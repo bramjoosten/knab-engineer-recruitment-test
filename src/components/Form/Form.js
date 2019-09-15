@@ -40,7 +40,7 @@ const Form = (props) => {
 
     return (
         <form className={classes.Wrapper} onSubmit={(ev) => ev.preventDefault()}>
-            <label htmlFor="input">Type your crypto code</label>
+            <label htmlFor="input">Enter your crypto code</label>
             <div className={classes.InputField} valid={props.isValid ? "valid" : null}>
                 <input
                     type="search"
@@ -51,7 +51,8 @@ const Form = (props) => {
                     onChange={inputChangedHandler}
                     spellCheck="false"
                     autoComplete="off"
-                    autoFocus></input>
+                    autoFocus>
+                </input>
             </div>
         </form>
     )

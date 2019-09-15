@@ -7,7 +7,7 @@ import { BrowserRouter } from 'react-router-dom'
 import { Provider } from 'react-redux'
 import createSagaMiddleware from 'redux-saga'
 import rootReducer from 'store/reducers'
-import { watchSideEffects } from 'store/sideEffects'
+import { watchSagas } from 'store/sagas'
 
 var isChrome = /Chrome/.test(navigator.userAgent) && /Google Inc/.test(navigator.vendor);
 const composeEnhancers = (process.env.NODE_ENV === 'development') && isChrome ? window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ : null || compose
@@ -20,7 +20,7 @@ const store = createStore(
     )
 )
 
-sagaMiddleware.run(watchSideEffects)
+sagaMiddleware.run(watchSagas)
 const baseName = process.env.NODE_ENV === 'development' ? "/" : "/crypto-converter/"
 const app = (
     <Provider store={store}>

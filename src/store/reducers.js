@@ -44,7 +44,8 @@ const fetchFail = (state, action) => {
 
 const calculateClear = (state, action) => {
     return updateObject(state, {
-        calculatedResult: null
+        calculatedResult: null,
+        error:null
     })
 }
 

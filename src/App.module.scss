@@ -51,7 +51,14 @@ body {
   z-index: 1;
 }
 
-.Error{
+.Show{
+  visibility: visible;
+  opacity:1
+}
+
+.ErrorMessage{
   color: red;
   font-size: 12px;
+  // opacity: 0;
+  transition: opacity 0.3s linear
 }

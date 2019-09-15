@@ -5,7 +5,6 @@ import * as actionTypes from './actionTypes'
 
 export function* calculateSaga(action) {
 
-
     //should return object with end results
     yield all([
         put(actions.fetchFiat()),
@@ -17,21 +16,18 @@ export function* calculateSaga(action) {
         take(actionTypes.FETCH_FIAT_SUCCESS)
     ])
 
-
-
     const rates = yield {
         USD: 1,
         ...fiat.data.rates
     }
 
-
     let quotes = Object.assign(
         ...Object.entries(rates).map(([currency, v]) => ({
-            [currency]: v * crypto.data.quote.USD.price
+            [currency]: v * crypto.data.data[action.userInput].quote.USD.price
         }))
     );
 
-    yield put(actions.calculateSuccess({quotes:quotes,name:crypto.data.name}))
+    yield put(actions.calculateSuccess({ quotes: quotes, name: crypto.data.data[action.userInput].name }))
 
 }
 
@@ -41,34 +37,34 @@ export function* fetchCryptoSaga(action) {
     try {
         const path = "/v1/cryptocurrency/quotes/latest"
         const symbol = action.value.length === 0 ? '' : `symbol=${action.value}`
-        const response = yield call(axios.get, 'https://bramjoosten.nl/crypto-converter/proxy/?path=' + path + '&' + symbol)
-        const data = response.data.data[action.value]
-        if(data){
+        const response = yield axios.get('https://bramjoosten.nl/crypto-converter/proxy/?path=' + path + '&' + symbol)
 
-            yield put(actions.fetchCryptoSuccess(data))
+        if(response.data){
+            yield put(actions.fetchCryptoSuccess(response.data))
         }else{
-            yield put(actions.fetchFail("Oops, code not recognized. Please try again."))    
+            yield put(actions.fetchFail("error: no data received"))
         }
 
     } catch (error) {
-        yield put(actions.fetchFail("Oops, code not recognized. Please try again."))
+        console.log("error sideffects")
+        yield put(actions.fetchFail(error))
     }
 }
 
 export function* fetchFiatSaga() {
     yield put(actions.fetchStart())
+
     try {
-        const response = yield call(axios.get,'https://api.exchangeratesapi.io/latest?symbols=EUR,GBP,BRL,AUD&base=USD')
+        const response = yield call(axios.get, 'https://api.exchangeratesapi.io/latest?symbols=EUR,GBP,BRL,AUD&base=USD')
         yield put(actions.fetchFiatSuccess(response.data))
     } catch (error) {
         yield put(actions.fetchFail(error))
-
     }
 
 }
 
 
-export function* watchSideEffects() {
+export function* watchSagas() {
     yield all([
         takeLatest(actionTypes.FETCH_CRYPTO, fetchCryptoSaga),
         takeLatest(actionTypes.FETCH_FIAT, fetchFiatSaga),

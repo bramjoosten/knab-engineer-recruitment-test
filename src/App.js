@@ -10,7 +10,7 @@ const App = props => {
 
   let results = <Results />
   if (props.error) {
-    results = (<p className={classes.Error}>{props.error}</p>)
+    results = (<p className={classes.ErrorMessage}>"Oops, code not recognized. Please try again."</p>)
   }
 
   return (
