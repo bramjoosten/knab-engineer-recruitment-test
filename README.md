@@ -6,6 +6,8 @@ tested with
 `npm 6.9.0`
 `yarn 1.17.3`
 
+libraries used: axios, redux, redux-saga. gsap
+
 ## Available Scripts
 
 In the project directory, you can run:
@@ -34,6 +36,7 @@ Your app is ready to be deployed!
 
 Runs deploy script from src/scripts/deploy.sh.
 
-1. In `src/scripts/deploy.sh`, Change `SSH_DEST` to deploy to your own server.
+To deploy the app on your own server, the following changes have to be made in your project
+1. In `src/scripts/deploy.sh`, Change the value of `SSH_DEST` to deploy to your own server via ssh.
 2. In `public/proxy/env.sample.php`, rename to `env.php` and add your own coinmarketcap api key
 3. In `package.json`, set `"homepage"` value to your server's public html folder, optionally a subdir.

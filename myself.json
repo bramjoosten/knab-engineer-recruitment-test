@@ -1,0 +1,23 @@
+{
+    "name": "Bram Joosten",
+    "date-of-birth": "24-10-1986",
+    "homepage": "https://bramjoosten.nl",
+    "age": 32,
+    "keywords":["curious","proactive","patience"],
+    "values":["respect","integrity","tolerant"],
+    "skillset":{
+        "Web":["javascript","typescript","html"],
+        "Front-end":["React","Webpack","Hugo","Sass","Gsap","Gulp","Grunt","Bootstrap","Handlebars","Knockout"],
+        "Design":["Sketch","Photoshop","Indesign","Illustrator","Google Web Designer"],
+        "CMS":["Wordpress","Squarespace","Woocommerce","Magento"],
+        "Back-end":["Node.js","PHP","Go","Java"],
+        "Other":["Git","Docker","Unix Command Line","AWS"]
+    },
+    "recent-clients":[
+        ["MediaMonks","Hilversum"],
+        ["SuperHeroes","Amsterdam"],
+        ["ViveApp","Amsterdam"],
+        ["Dutch Portfolio","Utrecht"]
+    ],
+    "hobbies": ["tennis","coding","cooking"]
+}
