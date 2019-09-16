@@ -34,6 +34,6 @@ Your app is ready to be deployed!
 
 Runs deploy script from src/scripts/deploy.sh.
 
-1. In `src/scripts/deploy.sh`, Change SSH_DEST to deploy to your own server.
-2. In `public/proxy/env.sample.php`, rename to env.php and add your own coinmarketcap api key
-3. In `package.json`, set "homepage" to your server's public html folder, optionally a subdir.
+1. In `src/scripts/deploy.sh`, Change `SSH_DEST` to deploy to your own server.
+2. In `public/proxy/env.sample.php`, rename to `env.php` and add your own coinmarketcap api key
+3. In `package.json`, set `"homepage"` value to your server's public html folder, optionally a subdir.
