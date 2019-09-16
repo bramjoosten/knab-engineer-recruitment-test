@@ -6,7 +6,7 @@ import { TimelineLite } from 'gsap'
 
 const Results = (props) => {
 
-    let results = null
+    let results, resultDescription = null
     const myTween = new TimelineLite()
     const { isAnimating } = props
     const description = useRef(null);
@@ -24,12 +24,19 @@ const Results = (props) => {
 
     }, [myElements, myTween, isAnimating])
 
+    // clear result so user gets immediate feedback if there's something wrong with an inputvalue
     if (!props.isValid || props.error) {
         props.onClearResult()
     }
 
 
     if (props.result) {
+
+        resultDescription = (
+            <p className={classes.Description} ref={p => myElements[0] = (p)}>
+                {"1 "}{props.result.name}{" equals to:"}
+            </p>
+        )
 
         results = Object.keys(props.result.quotes).map((currency, index) => {
 
@@ -57,10 +64,10 @@ const Results = (props) => {
         myElements.unshift(description.current)
 
     } else {
-        results = null
+        results = resultDescription = null
     }
 
-    const resultDescription = props.result ? <p className={classes.Description} ref={p => myElements[0] = (p)}>{"1 "}{props.result.name}{" equals to:"}</p> : null
+
 
     return (
         <div className={classes.Wrapper}>
@@ -74,7 +81,6 @@ const mapStateToProps = state => {
     return {
         result: state.calculatedResult,
         isValid: state.formIsValid,
-        loading: state.loading,
         error: state.error,
         isAnimating: state.isAnimating
     }

@@ -11,19 +11,23 @@ const Form = (props) => {
     const inputRef = useRef()
 
     const inputChangedHandler = ev => {
+        //should always check for validity
+        const validity = checkValidity(ev.target.value, { required: true, minLength: 3 })
+        
         setInputValue(ev.target.value)
         setIsTouched(true)
 
-        const validity = checkValidity(ev.target.value, { required: true, minLength: 3 })
+        
+        //clear the result whenever we can, so we don't get flickering between queries.
         props.onClearResult()
-
-        if (validity !== props.isValid) {
-
+        if (validity !== isValid) {
             props.onSetValidity(validity)
         }
     }
 
     useEffect(() => {
+
+        //wait a short while between keystrokes to prevent sending too much requests at once
         const timer = setTimeout(() => {
             if (isValid && isTouched && inputValue === inputRef.current.value) {
                 onCalculate(inputValue.toUpperCase())
@@ -31,7 +35,7 @@ const Form = (props) => {
                     inputRef.current.blur()
                 }
             }
-        }, 500)
+        }, 150)
         return () => {
             clearTimeout(timer)
         }
@@ -47,7 +51,7 @@ const Form = (props) => {
                     ref={inputRef}
                     id="input"
                     placeholder={"e.g. \"btc\""}
-                    value={inputValue}
+                    // value={inputValue}
                     onChange={inputChangedHandler}
                     spellCheck="false"
                     autoComplete="off"
@@ -60,10 +64,8 @@ const Form = (props) => {
 
 const mapStateToProps = state => {
     return {
-        loading: state.loading,
-        error: state.error,
-        result: state.calculatedResult,
-        isValid: state.formIsValid
+        isValid: state.formIsValid,
+        result: state.result
     }
 }
 
