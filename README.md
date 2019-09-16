@@ -1,10 +1,10 @@
 # Crypto Converter
 A coding assignment for Knab bank, built mainly in React.js for the front-end and a bit of php for proxying api requests. 
 
-tested with 
-node v10.16.3
-npm 6.9.0
-yarn 1.17.3
+tested with  
+`node v10.16.3`
+`npm 6.9.0`
+`yarn 1.17.3`
 
 ## Available Scripts
 
@@ -32,8 +32,8 @@ Your app is ready to be deployed!
 
 ### `yarn deploy`
 
-runs deploy script from src/scripts/deploy.sh. 
+Runs deploy script from src/scripts/deploy.sh.
 
-in src/scripts/deploy.sh, Change SSH_DEST to deploy to your own server.
-in public/proxy/env.sample.php, rename to env.php and add your own coinmarketcap api key
-in package.json, set "homepage" to your server's public html folder, optionally a subdir.
+1. In `src/scripts/deploy.sh`, Change SSH_DEST to deploy to your own server.
+2. In `public/proxy/env.sample.php`, rename to env.php and add your own coinmarketcap api key
+3. In `package.json`, set "homepage" to your server's public html folder, optionally a subdir.
