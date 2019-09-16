@@ -6,11 +6,12 @@ import Results from 'components/Results/Results'
 import Form from 'components/Form/Form'
 import Spinner from 'components/Spinner/Spinner'
 
+
 const App = props => {
 
   let results = <Results />
   if (props.error) {
-    results = (<p className={classes.ErrorMessage}>"Oops, code not recognized. Please try again."</p>)
+    results = (<p className={classes.ErrorMessage}>Oops, code not recognized. Please try again.</p>)
   }
 
   return (
@@ -28,5 +29,6 @@ const mapStateToProps = state => {
     error: state.error
   }
 }
+
 
 export default connect(mapStateToProps)(App)
