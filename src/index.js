@@ -10,7 +10,9 @@ import rootReducer from 'store/reducers'
 import { watchSagas } from 'store/sagas'
 
 var isChrome = /Chrome/.test(navigator.userAgent) && /Google Inc/.test(navigator.vendor);
-const composeEnhancers = (process.env.NODE_ENV === 'development') && isChrome ? window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ : null || compose
+var isMobile = 'ontouchstart' in document.documentElement
+
+const composeEnhancers = (process.env.NODE_ENV === 'development') && isChrome && !isMobile ? window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ : null || compose
 const sagaMiddleware = createSagaMiddleware()
 
 const store = createStore(
