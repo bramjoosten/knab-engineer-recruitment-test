@@ -16,7 +16,7 @@ export function* calculateSaga(action) {
         take(actionTypes.FETCH_FIAT_SUCCESS)
     ])
 
-    const rates = yield {
+    const rates = {
         USD: 1,
         ...fiat.data.rates
     }
@@ -30,6 +30,7 @@ export function* calculateSaga(action) {
     yield put(actions.calculateSuccess({ quotes: quotes, name: crypto.data.data[action.userInput].name }))
 
 }
+
 
 export function* fetchCryptoSaga(action) {
     yield put(actions.fetchStart())
@@ -46,11 +47,11 @@ export function* fetchCryptoSaga(action) {
         }
 
     } catch (error) {
-        console.log("error sideffects")
         yield put(actions.fetchFail(error))
     }
 }
 
+// fetch a list of quotes for 5 fiat (non-crypto) currencies as described in the assignment, so we can compute the crypto exchange rates for the user.
 export function* fetchFiatSaga() {
     yield put(actions.fetchStart())
 
