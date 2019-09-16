@@ -1,4 +1,4 @@
-export const cryptoMockResponse = {
+export const cryptoResponse = {
     "status": {
         "timestamp": "2019-09-15T11:20:56.100Z",
         "error_code": 0,
@@ -39,7 +39,7 @@ export const cryptoMockResponse = {
     }
 }
 
-export const fiatMockResponse = {
+export const fiatResponse = {
     "rates":
     {
         "EUR": 0.9012256669,
@@ -50,3 +50,17 @@ export const fiatMockResponse = {
     "base": "USD",
     "date": "2019-09-13"
 }
+
+export const calculateSuccess = {
+    type: 'CALCULATE_SUCCESS',
+    result: {
+      quotes: {
+        USD: 0.00248100900083,
+        EUR: 0.0022359489913579196,
+        AUD: 0.003605691343605347,
+        BRL: 0.010053721044867884,
+        GBP: 0.0019920740348426816
+      },
+      name: 'Dogecoin'
+    }
+  }
