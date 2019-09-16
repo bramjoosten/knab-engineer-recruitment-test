@@ -1,4 +1,9 @@
 #!/bin/sh
+#ignore files
+if [ -f "./build/proxy/env.sample.php" ]; 
+then
+    rm build/proxy/env.sample.php
+fi
 
 if [ -d "./build" ]
 then

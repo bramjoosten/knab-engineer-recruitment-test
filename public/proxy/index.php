@@ -1,6 +1,7 @@
 <?php
 
-$API_KEY = '127ad382-3615-4987-b190-08711ec6962d';
+include_once(__DIR__."/env.php");
+
 $url = 'https://pro-api.coinmarketcap.com';
 
 parse_str($_SERVER['QUERY_STRING'], $incoming_params);
@@ -10,6 +11,7 @@ $outgoing_request = "{$url}{$incoming_params['path']}";
 
 // remove path for outgoing request
 unset($incoming_params['path']);
+
 
 // query string encode the parameters
 // $filtered_qs = http_build_query($incoming_params); 
@@ -22,7 +24,7 @@ $outgoing_request .= "?{$filtered_qs}";
 $headers = [
   'Accepts: application/json',
   'Accept-Encoding: deflate, gzip',
-  'X-CMC_PRO_API_KEY: 127ad382-3615-4987-b190-08711ec6962d'
+  'X-CMC_PRO_API_KEY: '. API_KEY_CMC
 ];
 
 // echo $outgoing_request;
@@ -61,17 +63,18 @@ if ( ! function_exists('gzdecode'))
 echo gzdecode($response);
 curl_close($curl); // Close request
 
+
 // enable_cors();
 
 function enable_cors() {
-  // Allow from any origin
+  
   if (isset($_SERVER['HTTP_ORIGIN'])) {
     header("Access-Control-Allow-Origin: {$_SERVER['HTTP_ORIGIN']}");
     header('Access-Control-Allow-Credentials: true');;
     header('Access-Control-Max-Age: 86400');	// cache for 1 day
   } else {
     header('accept-encoding: gzip/deflate');
-    header("Access-Control-Allow-Origin: *");
+    header("Access-Control-Allow-Origin: https://bramjoosten.nl");
     header('Access-Control-Allow-Credentials: true');;
     header('Access-Control-Max-Age: 86400');	// cache for 1 day
   }
