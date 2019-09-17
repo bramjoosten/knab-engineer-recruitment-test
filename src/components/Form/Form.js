@@ -26,7 +26,6 @@ const Form = (props) => {
     }
 
     useEffect(() => {
-
         //wait a short while between keystrokes to prevent sending too much requests at once
         const timer = setTimeout(() => {
             if (isValid && isTouched && inputValue === inputRef.current.value) {

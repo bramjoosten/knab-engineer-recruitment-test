@@ -3,11 +3,11 @@
     "date-of-birth": "24-10-1986",
     "homepage": "https://bramjoosten.nl",
     "age": 32,
-    "keywords":["curious","proactive","patience"],
-    "values":["respect","integrity","tolerant"],
+    "keywords":["curious","proactive","patient"],
+    "values":["respect","integrity","authenticity"],
     "skillset":{
         "Web":["javascript","typescript","html"],
-        "Front-end":["React","Webpack","Hugo","Sass","Gsap","Gulp","Grunt","Bootstrap","Handlebars","Knockout"],
+        "Front-end":["React","Webpack","Hugo","Sass","Gsap","Bootstrap"],
         "Design":["Sketch","Photoshop","Indesign","Illustrator","Google Web Designer"],
         "CMS":["Wordpress","Squarespace","Woocommerce","Magento"],
         "Back-end":["Node.js","PHP","Go","Java"],
@@ -19,5 +19,10 @@
         ["ViveApp","Amsterdam"],
         ["Dutch Portfolio","Utrecht"]
     ],
+    "ambitions":{
+        "short-term": "Land a job working on a product in a team.",
+        "mid-term": "Gain working experience as a front-end developer.",
+        "long-term": "Build a product that solves real-world problems and is meaningful."
+    },
     "hobbies": ["tennis","coding","cooking"]
 }
