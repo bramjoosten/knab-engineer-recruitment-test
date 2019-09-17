@@ -1,9 +1,11 @@
 .Wrapper {
     display: flex;
     flex-direction: column;
+    position: relative;
 
     label {
         margin-bottom: 10px;
+        font-size: 14px;
     }
 
     input {
@@ -28,4 +30,11 @@ input[type="search"] {
 
 input[type="search"]::-webkit-search-decoration {
     -webkit-appearance: none;
+}
+
+.Spinner {
+    position: absolute;
+    right: -7px;
+    bottom: 12px;
+    z-index: 1;
 }

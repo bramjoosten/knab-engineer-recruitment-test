@@ -3,6 +3,7 @@ import classes from './Form.module.scss'
 import { connect } from 'react-redux'
 import * as actions from 'store/actions'
 import { checkValidity } from 'shared/utility'
+import Spinner from 'components/Spinner/Spinner'
 
 const Form = (props) => {
     const [inputValue, setInputValue] = useState('')
@@ -13,11 +14,11 @@ const Form = (props) => {
     const inputChangedHandler = ev => {
         //should always check for validity
         const validity = checkValidity(ev.target.value, { required: true, minLength: 3 })
-        
+
         setInputValue(ev.target.value)
         setIsTouched(true)
 
-        
+
         //clear the result whenever we can, so we don't get flickering between queries.
         props.onClearResult()
         if (validity !== isValid) {
@@ -42,29 +43,32 @@ const Form = (props) => {
 
 
     return (
-        <form className={classes.Wrapper} onSubmit={(ev) => ev.preventDefault()}>
-            <label htmlFor="input">Enter your crypto code</label>
-            <div className={classes.InputField} valid={props.isValid ? "valid" : null}>
-                <input
-                    type="search"
-                    ref={inputRef}
-                    id="input"
-                    placeholder={"e.g. \"btc\""}
-                    // value={inputValue}
-                    onChange={inputChangedHandler}
-                    spellCheck="false"
-                    autoComplete="off"
-                    autoFocus>
-                </input>
-            </div>
-        </form>
+        <div className={classes.Wrapper}  >
+            <form onSubmit={(ev) => ev.preventDefault()}>
+                <label htmlFor="input">Enter your crypto code</label>
+                <div className={classes.InputField} valid={props.isValid ? "valid" : null}>
+                    <input
+                        type="search"
+                        ref={inputRef}
+                        id="input"
+                        placeholder={"e.g. \"btc\""}
+                        onChange={inputChangedHandler}
+                        spellCheck="false"
+                        autoComplete="off"
+                        autoFocus>
+                    </input>
+                </div>
+            </form>
+            <Spinner className={classes.Spinner} loading={props.loading} />
+        </div>
     )
 }
 
 const mapStateToProps = state => {
     return {
         isValid: state.formIsValid,
-        result: state.result
+        result: state.result,
+        loading: state.loading
     }
 }
 

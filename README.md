@@ -1,6 +1,8 @@
 # Crypto Converter
 A coding assignment for Knab bank, built mainly in React.js for the front-end and of php for proxying api requests. 
 
+Demo: https://bramjoosten.nl/crypto-converter
+
 tested with  
 `node v10.16.3`
 `npm 6.9.0`
