@@ -1,12 +1,12 @@
 # Crypto Converter
-A coding assignment for Knab bank, built mainly in React.js for the front-end and a bit of php for proxying api requests. 
+A coding assignment for Knab bank, built mainly in React.js for the front-end and of php for proxying api requests. 
 
 tested with  
 `node v10.16.3`
 `npm 6.9.0`
 `yarn 1.17.3`
 
-libraries used: axios, redux, redux-saga. gsap
+Tech used: react, redux, redux-saga, gsap, axios.
 
 ## Available Scripts
 
@@ -36,7 +36,10 @@ Your app is ready to be deployed!
 
 Runs deploy script from src/scripts/deploy.sh.
 
-To deploy the app on your own server, the following changes have to be made in your project
-1. In `src/scripts/deploy.sh`, Change the value of `SSH_DEST` to deploy to your own server via ssh.
+In order to deploy the app on your own server, you need an apache/php server that exposes a public html folder and an ssh connection set up. 
+
+The following changes have to be made in your project
+1. In `src/scripts/deploy.sh`, Change the value of `SSH_DEST` to deploy to your own server.
 2. In `public/proxy/env.sample.php`, rename to `env.php` and add your own coinmarketcap api key
-3. In `package.json`, set `"homepage"` value to your server's public html folder, optionally a subdir.
+3. In `package.json`, set `"homepage"` value to your server's public html folder and/or subdir.
+4. In `src/index.js`, set the basename to `"/"` for root, or change it to your subdir.
